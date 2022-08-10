@@ -1,31 +1,31 @@
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
-public class Box {
-    protected String name; //имя коробки
-    protected int size; //размер коробки
-    protected Box[] cells; //массив с пустыми ячейками в коробке
 
-    protected List items = new ArrayList<>(); //ArrayList - это список на основе массива,
-    // позволяет добиться рандомного доступа к элементам по индексу.
+public class Box <T> {
+    protected String name;
+    protected int size;
+    protected T [] items;
 
+    //TODO конструктор коробок:
     public Box(String name, int size) {
         this.name = name;
         this.size = size;
-        this.cells = new Box[size]; //создаём массив с заданным размером
+        items = (T[]) new Object [size];
     }
 
-    protected Random random = new Random(); // класс Рандом выдаёт случайное число
-    int randomint = random.nextInt(size) + 1; //джава подберёт <int randomint> от 0 до <size> не вкл.(поэтому +1)
+
+//    protected Random random = new Random();
+//    int randomInt = random.nextInt(size) + 1;
 
 
-
-
-    public String getName(){
-        return name;
-    }
-    public int getSize(){
-        return size;
+    //TODO метод заполениня коробки:
+    public boolean add(T item) {
+        for (int i = 0; i < items.length; i++) {
+            if (items[i] == null) {
+                items[i] = item;
+                return true;
+            }
+        }
+        return false;
     }
 }
 
