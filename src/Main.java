@@ -4,13 +4,18 @@ public class Main {
     public static void main(String[] args) {
 
         //TODO создаем объект класса Box:
-        Box box = new Box<Integer>("box1", 5);
-        box.add(15);
-        box.add(45);
-        box.add(4);
-        box.add(18);
+        Box <Integer> box1 = new Box<>( 5);
+        box1.add(15);
+        box1.add(45);
+        box1.add(4);
+        box1.add(18);
+        box1.add(1);
+        box1.add(2);
 
-        System.out.println(Arrays.toString(box.items));
+        Box <String> box2 = new Box <>(2);
+        box2.add("table");
 
+        System.out.println(Arrays.toString(box1.items));
+        System.out.println(Arrays.toString(box2.items));
     }
 }
