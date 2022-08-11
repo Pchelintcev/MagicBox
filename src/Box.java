@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Box<T> {
     protected int size; //размер
-    protected  T[] items;
+    protected T[] items;
 
     public Box(int size) {
         this.size = size;
@@ -17,23 +17,31 @@ public class Box<T> {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = item;
+
                 filled += 1;
                 System.out.println(Arrays.toString(items));
-                System.out.println("свободных ячеек: " + (items.length - filled));
-                if (filled == items.length){
-                    int randomInt = random.nextInt(items.length);
-                    System.out.println("случайный элемент из коробки: " + items[randomInt]);
-                    System.out.println();
-                }
                 return true;
             }
         }
-        System.out.println("коробка полна, нет места для добавления нового объекта.");
         return false;
     }
+
+    public T pick(){
+        for (int i = 0; i < items.length; i++){
+            if(filled < items.length){
+                throw new RuntimeException("свободных ячеек: " + (items.length - filled) + ", их надо заполнить.");
+            }
+            if (filled == items.length){ //если массив заполнен
+                int randomInt = random.nextInt(items.length);
+                System.out.println("коробка заполнена.");
+                System.out.println("случайный элемент из коробки: " + items[randomInt]);
+                System.out.println();
+                return items[randomInt];
+            }
+        }
+        return null;
+    }
 }
-
-
 
 
 
