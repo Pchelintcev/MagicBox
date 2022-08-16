@@ -7,37 +7,39 @@ public class Box<T> {
 
     public Box(int size) {
         this.size = size;
-        items = (T[]) new Object[size];
+        items = (T[]) new Object[size]; //что тут не так???
     }
 
-    Random random = new Random();
-    int filled = 0; // занятые ячейки
+    int filled = 0; //кол-во занятых ячеек
 
+    //TODO метод add - добавление предмета
     public boolean add(T item) {
         for (int i = 0; i < items.length; i++) {
             if (items[i] == null) {
                 items[i] = item;
-
                 filled += 1;
                 System.out.println(Arrays.toString(items));
                 return true;
             }
         }
+        System.out.println("для нового элемента в коробке нет места.");
         return false;
     }
 
-    public T pick(){
-        for (int i = 0; i < items.length; i++){
-            if(filled < items.length){
-                throw new RuntimeException("свободных ячеек: " + (items.length - filled) + ", их надо заполнить.");
-            }
-            if (filled == items.length){ //если массив заполнен
-                int randomInt = random.nextInt(items.length);
-                System.out.println("коробка заполнена.");
-                System.out.println("случайный элемент из коробки: " + items[randomInt]);
-                System.out.println();
-                return items[randomInt];
-            }
+    int randomInt; //случайная ячейка в массиве
+
+    //TODO метод pick - выбор (случайного предмета)
+    public T pick() {
+        Random random = new Random(); //заводим новый объект класса Random
+        if (filled < items.length) {
+            throw new RuntimeException("свободных ячеек: " + (items.length - filled) + ", их надо заполнить.");
+        }
+        if (filled == items.length) {
+            randomInt = random.nextInt(items.length); //поиск случайной ячейки
+            System.out.println("коробка заполнена.");
+            System.out.println("случайный элемент из коробки: " + items[randomInt]);
+            System.out.println();
+            return items[randomInt];
         }
         return null;
     }
